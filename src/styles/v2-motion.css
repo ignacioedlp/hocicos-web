@@ -1,0 +1,27 @@
+.story-experience { position: relative; }
+.story-tabs button { position: relative; transition: color 220ms, background-color 220ms; }
+.story-announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.chapters { min-height: 420px; }
+.v2-motion .next-chapter > span, .v2-motion .header-cta > span { transition: transform 250ms var(--motion-ease); }
+.v2-motion .next-chapter:is(:hover, :focus-visible) > span, .v2-motion .header-cta:is(:hover, :focus-visible) > span { transform: translateX(5px); }
+.v2-motion .text-link { transition: text-underline-offset 250ms, color 250ms; }
+.v2-motion .text-link:is(:hover, :focus-visible) { text-underline-offset: 8px; color: #913921; }
+.v2-motion .tab-number { transition: transform 350ms var(--motion-ease), background-color 220ms, color 220ms; }
+.v2-motion .story-tabs button:is(:hover, :focus-visible) .tab-number { transform: translateY(-3px); }
+.v2-motion .care dl > div { transition: translate 350ms var(--motion-ease); }
+.v2-motion .care dl > div:hover { translate: 5px 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .v2-motion .hero-picture > img { animation: photo-settle 1400ms var(--motion-ease) both; }
+  .v2-motion .hero-actions { animation: hero-actions-in 850ms 250ms var(--motion-ease) both; }
+  .v2-motion .photo-caption { animation: hero-actions-in 850ms 450ms var(--motion-ease) both; }
+  .v2-motion .hero-picture > .hand-note { animation: note-settle 1000ms 550ms var(--motion-ease) both; }
+  .v2-motion .mission-photo > img, .v2-motion .cat-photo > img { transition: transform 900ms var(--motion-ease); }
+  .v2-motion .mission-photo:hover > img, .v2-motion .cat-photo:hover > img { transform: scale(1.035); }
+  .v2-motion .hero-picture > .hand-note, .v2-motion .cat-photo > .hand-note { transition: transform 500ms var(--motion-ease); }
+  .v2-motion .hero-picture:hover > .hand-note, .v2-motion .cat-photo:hover > .hand-note { transform: rotate(-3deg) translateY(-3px); }
+  @keyframes photo-settle { from { opacity: .6; transform: scale(1.055); } to { opacity: 1; transform: scale(1); } }
+  @keyframes hero-actions-in { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes note-settle { from { opacity: 0; translate: 0 18px; rotate: -5deg; } to { opacity: 1; translate: 0 0; rotate: 0deg; } }
+}
+@media (prefers-reduced-motion: reduce) { .v2-motion .care dl > div:hover { translate: none; } }
+@media (max-width:700px) { .chapters { min-height: 620px; } }

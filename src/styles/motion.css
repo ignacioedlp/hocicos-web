@@ -1,0 +1,65 @@
+:root { --motion-ease: cubic-bezier(.16, 1, .3, 1); }
+section[id] { scroll-margin-top: 24px; }
+.site-header nav a, footer a, .privacy a { position: relative; }
+.site-header nav a::after, footer a::after, .privacy a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -5px;
+  height: 2px; background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform 220ms var(--motion-ease);
+}
+.site-header nav a:is(:hover, :focus-visible, [aria-current]), footer a:is(:hover, :focus-visible), .privacy a:is(:hover, :focus-visible) { color: #e76546; }
+.site-header nav a:is(:hover, :focus-visible, [aria-current])::after, footer a:is(:hover, :focus-visible)::after, .privacy a:is(:hover, :focus-visible)::after { transform: scaleX(1); }
+:root .header-cta, :root .button, :root .store {
+  translate: var(--magnet-x, 0px) var(--magnet-y, 0px);
+  transition: transform 220ms var(--motion-ease), translate 220ms var(--motion-ease), box-shadow 220ms var(--motion-ease);
+}
+:root .header-cta:active, :root .button:active, :root .store:active { transform: scale(.96); }
+.button > span { transition: transform 220ms var(--motion-ease); }
+.button:is(:hover, :focus-visible) > span { transform: translateX(6px); }
+.brand img, .step-number, .feature-dot, .privacy-icon, .story-image img { transition: transform 450ms var(--motion-ease); }
+.brand:is(:hover, :focus-visible) img { transform: rotate(-12deg) scale(1.08); }
+.story-image:hover img { transform: scale(1.025); }
+.step:hover .step-number { transform: translateY(-4px) rotate(-6deg); }
+.community li:hover .feature-dot { transform: scale(1.3); }
+.privacy:hover .privacy-icon { transform: rotate(-6deg) scale(1.05); }
+.faq summary { list-style: none; position: relative; padding-right: 42px; transition: color 180ms; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: ''; position: absolute; right: 4px; top: 50%; translate: 0 -50%; width: 30px; height: 30px;
+  border-radius: 50%; background-color: #fbe8df;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M12 5v14M5 12h14' stroke='%23c94e32' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-position: center; background-size: 18px 18px; background-repeat: no-repeat;
+  transition: transform 250ms var(--motion-ease);
+}
+.faq details[open]:not([data-expanded='false']) summary::after { transform: rotate(45deg); }
+.faq summary:is(:hover, :focus-visible), .faq details[open] summary { color: #c94e32; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .motion-reveal { opacity: .65; transform: translateY(24px); transition: opacity 700ms var(--motion-ease), transform 700ms var(--motion-ease); transition-delay: var(--reveal-delay, 0ms); }
+  .motion-ready .motion-reveal.visible, .motion-ready .motion-reveal:focus-within { opacity: 1; transform: none; }
+  .hero h1 { animation: rise-in 850ms var(--motion-ease) both; }
+  .hero-content > p { animation: rise-in 850ms 120ms var(--motion-ease) both; }
+  .hero .store-row { animation: rise-in 850ms 230ms var(--motion-ease) both; }
+  .hero-note { animation: note-in 700ms 380ms var(--motion-ease) both; }
+  .photo-note { animation: note-in 900ms 450ms var(--motion-ease) both; }
+  .hero-note path { stroke-dasharray: 90; stroke-dashoffset: 90; animation: draw-arrow 900ms 700ms var(--motion-ease) forwards; }
+  .community.in-view .phone { animation: phone-float 5s ease-in-out 2; }
+  .community.in-view .map-pin::after { animation: pin-pulse 2s ease-out 4; }
+  .map-pin::after { content: ''; position: absolute; width: 24px; height: 24px; border: 2px solid #e76446; border-radius: 50%; left: 50%; top: 50%; margin: -12px; opacity: 0; }
+  .community.in-view .pet-card { animation: rise-in 650ms 350ms var(--motion-ease) both; }
+  @keyframes rise-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @keyframes note-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: 0 0; } }
+  @keyframes draw-arrow { to { stroke-dashoffset: 0; } }
+  @keyframes phone-float { 0%, 100% { transform: rotate(-8deg) translateY(35px); } 50% { transform: rotate(-6deg) translateY(25px); } }
+  @keyframes pin-pulse { from { opacity: .6; transform: scale(.7); } to { opacity: 0; transform: scale(2.4); } }
+}
+@media (hover: none) {
+  :root .header-cta:hover, :root .button:hover, :root .store:hover { transform: none; }
+  :root .header-cta:active, :root .button:active, :root .store:active { transform: scale(.96); }
+  :root .step:hover .step-image, :root .step:hover .step-number, :root .story-image:hover img, :root .privacy:hover .privacy-icon { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:root { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  :root .header-cta, :root .button, :root .store { translate: none; }
+  .motion-ready .motion-reveal { opacity: 1; transform: none; }
+}
